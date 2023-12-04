@@ -2,15 +2,14 @@ const mongoose = require("mongoose");
 
 const AnnoceSchema = new mongoose.Schema(
   {
-    location: { type: String, required: true },
-    numberOfRooms: { type: Number, required: true },
-    rent: { type: Number, required: true },
-    date: { type: String, required: true },
-    description: { type: String, required: true },
-    photos: { type: String, required: true },
-    availability: { type: Boolean, required: true },
+    location: { type: String, required: false },
+    numberOfRooms: { type: Number, required: false },
+    rent: { type: Number, required: false },
+    description: { type: String, required: false },
+    photos: [{ type: String, required: false }],
+    availability: { type: Boolean, required: false },
   },
   { timestamps: true }
 );
-const Annonce = mongoose.model("Annoce", AnnoceSchema);
+const Annonce = mongoose.model("Annonce", AnnoceSchema);
 module.exports = Annonce;

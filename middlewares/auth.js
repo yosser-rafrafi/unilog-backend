@@ -2,7 +2,7 @@ const jwt = require("jsonwebtoken");
 const UserModel = require("../models/User");
 const config = process.env;
 
-exports.authorize = () => async (req, res, next) => {
+exports.authorize = (passedRole = null) => async (req, res, next) => {
   try {
     let token = req.headers["x-access-token"] || req.headers.authorization;
     if (token && token.startsWith("Bearer ")) {
@@ -14,6 +14,7 @@ exports.authorize = () => async (req, res, next) => {
     const user = await UserModel.findById(data.id).lean();
     req.user = user;
     req.role = user.role;
+    if(passedRole && passedRole !== user.role) throw new Error("forbidden access !")
     next();
   } catch (error) {
     res.status(401).json({ message: "you are not authorized to do this!" });

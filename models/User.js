@@ -11,7 +11,6 @@ const userSchema = new mongoose.Schema(
         type: Schema.Types.ObjectId,
         ref: "Annonce",
         required: false,
-        default: [],
       },
     ],
     demandes: [
